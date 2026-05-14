@@ -31,6 +31,7 @@ import {
   Check
 } from "lucide-react";
 import React, { useState } from "react";
+import { ChatBot } from "./components/ChatBot";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -1103,6 +1104,7 @@ export default function App() {
           </div>
         </div>
       </footer>
+      <ChatBot />
     </div>
   );
 }
