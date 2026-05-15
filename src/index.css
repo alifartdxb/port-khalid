@@ -7,13 +7,30 @@
   --color-brand-primary: #042047;
   --color-brand-secondary: #00a3b5;
   --color-brand-accent: #00c2d6;
-  --color-brand-bg: #042047;
-  --color-brand-surface: #1a3d52;
+  --color-brand-bg: #041634;
+  --color-brand-surface: #0a1f44;
   --color-brand-text-dark: #f8fafc;
   --color-brand-text-muted: #94a3b8;
   --color-brand-outline: #1e3a4f;
-
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass-bg: rgba(255, 255, 255, 0.03);
+  
   --spacing-container-max: 1280px;
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-[var(--color-glass-bg)] backdrop-blur-md border border-[var(--color-glass-border)] transition-all duration-300;
+  }
+  .glow-cyan {
+    box-shadow: 0 0 30px rgba(0, 163, 181, 0.15);
+  }
+  .industrial-grid {
+    background-image: 
+      linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
 }
 
 @layer base {

@@ -367,311 +367,284 @@ export default function App() {
         )}
       </nav>
 
-      <main className="relative z-10">
-        {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden pt-24">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-secondary/5 to-transparent pointer-events-none opacity-50"></div>
+      <main className="relative z-10 industrial-grid">
+        {/* Premium Hero Section */}
+        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-24">
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-bg via-transparent to-brand-bg z-0"></div>
+          <div className="absolute top-1/4 right-0 w-1/3 h-1/2 bg-brand-secondary/10 blur-[120px] rounded-full z-0"></div>
           
-          <div className="max-w-container-max mx-auto px-10 w-full">
+          <div className="max-w-container-max mx-auto px-10 w-full relative z-10">
             <motion.div 
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="space-y-0"
+              className="max-w-5xl"
             >
-              <p className="text-brand-secondary font-black uppercase tracking-[0.5em] text-xs mb-6">
-                Premier Supply Chain Hub
-              </p>
-              <h1 className="text-[clamp(3.5rem,12vw,9rem)] leading-[0.8] font-black tracking-tighter uppercase mb-2">
-                Port Khalid<br/>
-                <span className="text-stroke-white opacity-90 inline-block mt-2">Cold Stores</span>
+              <div className="inline-flex items-center gap-3 px-4 py-2 border border-brand-secondary/30 bg-brand-secondary/5 rounded-full mb-10 overflow-hidden group">
+                <motion.div 
+                  className="w-2 h-2 rounded-full bg-brand-secondary"
+                  animate={{ scale: [1, 1.5, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                <span className="text-brand-secondary text-[10px] uppercase font-black tracking-[0.3em]">
+                  Dockside Excellence Since 1985
+                </span>
+                <div className="ml-4 w-px h-3 bg-brand-secondary/20 group-hover:h-5 transition-all"></div>
+                <span className="text-white/40 text-[10px] uppercase font-black tracking-widest">
+                  Berths 9 & 10 • Sharjah Port
+                </span>
+              </div>
+
+              <h1 className="text-[clamp(3rem,10vw,7.5rem)] leading-[0.85] font-black tracking-tighter uppercase mb-10">
+                Precision <br/>
+                <span className="text-stroke-white opacity-90 block">Cold Chain</span>
+                <span className="text-brand-secondary">Infrastructure</span>
               </h1>
+              
+              <p className="text-white/60 text-xl md:text-2xl font-medium max-w-2xl leading-relaxed mb-12">
+                5,000 MT capacity across seven specialized temperature zones. Providing seamless dockside logistics and sovereign-grade storage solutions in the heart of maritime Sharjah.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center gap-6">
+                <motion.a 
+                  href="#contact"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full sm:w-auto px-10 py-6 bg-brand-secondary text-black font-black uppercase tracking-[0.2em] text-sm flex items-center justify-center gap-4 glow-cyan hover:bg-white transition-all shadow-2xl shadow-brand-secondary/20"
+                >
+                  Start Storage Inquiry
+                  <ArrowRight size={20} />
+                </motion.a>
+                
+                <motion.a 
+                  href="https://wa.me/97165282241"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full sm:w-auto px-10 py-6 glass-card text-white font-black uppercase tracking-[0.2em] text-sm flex items-center justify-center gap-4 hover:bg-brand-secondary/10 transition-all"
+                >
+                  WhatsApp Support
+                  <Phone size={18} className="text-brand-secondary" />
+                </motion.a>
+              </div>
             </motion.div>
 
-            {/* Stats Grid Overlay */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-8 mt-24 border-t border-white/10 pt-16">
+            {/* Floating Trust Badge */}
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1, duration: 1 }}
+              className="absolute right-10 bottom-1/4 hidden xl:block"
+            >
+              <div className="glass-card p-8 flex flex-col gap-8 rotate-1">
+                <div className="space-y-1">
+                  <div className="text-5xl font-black text-brand-secondary">5.0k</div>
+                  <div className="text-[10px] uppercase font-black tracking-widest text-white/40 leading-none">Metric Tonnes Capacity</div>
+                </div>
+                <div className="w-full h-px bg-white/10"></div>
+                <div className="space-y-1">
+                  <div className="text-5xl font-black text-white">07</div>
+                  <div className="text-[10px] uppercase font-black tracking-widest text-white/40 leading-none">Dedicated Thermal Rooms</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+          
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+            <div className="w-px h-12 bg-gradient-to-b from-brand-secondary to-transparent"></div>
+          </div>
+        </section>
+
+        {/* Global Statistics & Trust Bar */}
+        <section className="py-20 bg-brand-surface relative z-10">
+          <div className="max-w-container-max mx-auto px-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-center text-center">
               {[
-                { value: "5,000", label: "Pallet Capacity", accent: true },
-                { value: "-18°C", label: "Deep Freeze capability" },
-                { value: "SHJ", label: "Port Side Access" },
-                { value: "24/7", label: "Customs Clearance" },
+                { label: "Founded", value: "1985" },
+                { label: "ISO Certified", value: "22000" },
+                { label: "Dockside Berths", value: "09 & 10" },
+                { label: "Customs Hub", value: "24/7" }
               ].map((stat, i) => (
-                <motion.div 
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 + (i * 0.1) }}
-                  className="space-y-2"
-                >
-                  <div className={`text-5xl md:text-6xl font-black ${stat.accent ? 'text-brand-secondary' : 'text-white'}`}>
-                    {stat.value}
-                  </div>
-                  <div className="text-[10px] uppercase tracking-[0.2em] font-black text-white/40">
-                    {stat.label}
-                  </div>
-                </motion.div>
+                <div key={i} className="space-y-2 group">
+                  <div className="text-white/20 text-[10px] uppercase font-black tracking-[0.3em] group-hover:text-brand-secondary transition-colors">{stat.label}</div>
+                  <div className="text-3xl md:text-5xl font-black text-white group-hover:scale-110 transition-transform">{stat.value}</div>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Vision & Mission Section */}
-        <section className="py-32 bg-brand-primary" id="about-us">
+        {/* Section 02: Operational Excellence & The Journey */}
+        <section className="py-32 bg-brand-bg relative overflow-hidden" id="about-us">
           <div className="max-w-container-max mx-auto px-10">
-            <motion.div 
-              {...fadeIn}
-              className="grid grid-cols-1 md:grid-cols-2 gap-12"
-            >
-              {/* Vision Card */}
-              <div className="border border-white/10 p-12 md:p-16 hover:border-brand-secondary transition-colors group relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-secondary/5 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-brand-secondary/10 transition-colors"></div>
-                  <h2 className="text-4xl md:text-5xl font-black mb-8 text-white relative z-10">
-                  Our <span className="text-brand-secondary">About Us</span>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              <motion.div {...fadeIn}>
+                <h3 className="text-xs uppercase tracking-[0.5em] font-black text-brand-secondary mb-10">Operational Excellence</h3>
+                <h2 className="text-5xl md:text-8xl font-black mb-10 leading-[0.9] tracking-tighter uppercase whitespace-pre-line">
+                  40 Years of<br/>
+                  <span className="text-stroke-white italic">Dockside Integrity</span>
                 </h2>
-                <p className="text-white/70 text-lg md:text-xl font-medium leading-relaxed relative z-10 italic">
-                  With over 40 years of cold storage expertise, we operate as a foundational dockside facility at Berths 9 & 10, Sharjah Port. We have been serving the UAE maritime logistics sector since 1985.
-                </p>
+                <div className="space-y-8 text-white/60 text-lg font-medium leading-relaxed">
+                  <p>
+                    Established in 1985 at Sharjah Port Berths 9 & 10, Port Khalid Cold Stores has evolved into a sovereign-grade cold chain hub. Our facility doesn't just store cargo; it protects the integrity of the regional food supply.
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <div className="glass-card p-6 border-l-4 border-l-brand-secondary">
+                      <h4 className="text-white text-sm font-black uppercase mb-2">Zero-Leak Integrity</h4>
+                      <p className="text-xs">Unyielding commercial transparency with zero hidden charges.</p>
+                    </div>
+                    <div className="glass-card p-6 border-l-4 border-l-brand-secondary">
+                      <h4 className="text-white text-sm font-black uppercase mb-2">Maritime Agility</h4>
+                      <p className="text-xs">Direct dockside access for reduced handling and thermal shock risk.</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <div className="relative group">
+                <div className="absolute inset-0 bg-brand-secondary/20 blur-[100px] rounded-full group-hover:bg-brand-secondary/30 transition-all"></div>
+                <div className="relative glass-card p-1 items-center justify-center flex aspect-square">
+                  <div className="w-full h-full industrial-grid opacity-30 absolute inset-0"></div>
+                  <div className="relative z-10 flex flex-col items-center gap-4">
+                    <Logo showText={false} className="scale-[2]" />
+                    <div className="text-center">
+                      <div className="text-[10px] font-black tracking-[0.5em] text-brand-secondary uppercase">Center of Excellence</div>
+                      <div className="text-3xl font-black text-white px-10">SHARJAH MARITIME GATEWAY</div>
+                    </div>
+                  </div>
+                </div>
               </div>
-
-              {/* Mission Card */}
-              <div className="border border-white/10 p-12 md:p-16 hover:border-brand-secondary transition-colors group relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-secondary/5 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-brand-secondary/10 transition-colors"></div>
-                <h2 className="text-4xl md:text-5xl font-black mb-8 text-white relative z-10">
-                  Our <span className="text-brand-secondary">Mission</span>
-                </h2>
-                <p className="text-white/70 text-lg md:text-xl font-medium leading-relaxed relative z-10">
-                  To deliver uncompromising, precision temperature-controlled solutions through four decades of operational expertise and our 5,000 MT dockside facility at Port Khalid. We safeguard our clients' assets, optimize their supply chain efficiency and foster enduring commercial partnerships built on absolute transparency and zero hidden charges.
-                </p>
-              </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
-        {/* Core Values Section */}
-        <section className="py-32 bg-white text-black border-y border-slate-100">
+        {/* Section 03: Service Bento Grid */}
+        <section className="py-32 bg-white text-black" id="services">
           <div className="max-w-container-max mx-auto px-10">
             <div className="text-center max-w-3xl mx-auto mb-20">
-              <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter">
-                Our <span className="text-brand-secondary">Core Values</span>
+              <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter uppercase whitespace-pre-line">
+                Strategic<br/>
+                <span className="text-brand-secondary">Storage Infrastructure</span>
               </h2>
-              <p className="text-slate-500 font-medium text-lg uppercase tracking-widest">
-                The pillars of our maritime operational excellence
+              <p className="text-slate-500 font-medium text-lg uppercase tracking-widest leading-relaxed">
+                Seven specialized thermal zones engineered for absolute cold chain reliability
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200">
-              {[
-                {
-                  title: "Unyielding Commercial Integrity",
-                  desc: "Absolute transparency in all operations and pricing. No hidden charges, ever.",
-                  icon: <Scale size={32} className="text-brand-secondary" />
-                },
-                {
-                  title: "Precision & Excellence",
-                  desc: "Meticulous execution, prompt responses, efficient cargo transfers across our 7-room network.",
-                  icon: <Target size={32} className="text-brand-secondary" />
-                },
-                {
-                  title: "Paramount Asset Safety",
-                  desc: "Every pallet treated as a vital commodity. Stringent hygiene protocols. Unbroken temperature control.",
-                  icon: <ShieldCheck size={32} className="text-brand-secondary" />
-                },
-                {
-                  title: "Adaptive Agility",
-                  desc: "Continuously evolving our infrastructure and services to meet the dynamic demands of international maritime trade.",
-                  icon: <Zap size={32} className="text-brand-secondary" />
-                }
-              ].map((value, i) => (
-                <motion.div 
-                  key={i}
-                  {...fadeIn}
-                  transition={{ delay: i * 0.1 }}
-                  className="bg-white p-12 hover:bg-slate-50 transition-colors group"
-                >
-                  <div className="mb-8 transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                    {value.icon}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[1000px]">
+              {/* Deep Freeze */}
+              <div className="md:col-span-8 md:row-span-1 bg-slate-50 border border-slate-100 p-12 group hover:border-brand-secondary transition-all relative overflow-hidden">
+                <div className="relative z-10">
+                  <div className="text-xs font-black text-brand-secondary mb-4 uppercase tracking-[0.3em]">Thermal Level 01</div>
+                  <h3 className="text-4xl md:text-6xl font-black mb-6 leading-none">ULTRA-LOW & <br/><span className="text-stroke-cyan italic">DEEP FROZEN</span></h3>
+                  <div className="flex items-center gap-4 text-3xl font-black mb-8">
+                    <Snowflake size={32} className="text-brand-secondary" />
+                    Upto -18°C
                   </div>
-                  <h3 className="text-xl font-black mb-4 leading-tight group-hover:text-brand-secondary transition-colors">
-                    {value.title}
-                  </h3>
-                  <p className="text-slate-500 text-sm font-medium leading-relaxed">
-                    {value.desc}
-                  </p>
-                </motion.div>
-              ))}
+                  <p className="text-slate-500 font-medium max-w-md">Dedicated infrastructure for imported poultry, meat, and seafood. Dual-redundant refrigeration prevents any thermal fluctuation.</p>
+                </div>
+                <div className="absolute bottom-[-20px] right-[-20px] text-[15rem] font-black text-black/5 select-none pointer-events-none italic">
+                  -18
+                </div>
+              </div>
+
+              {/* Stats Small */}
+              <div className="md:col-span-4 md:row-span-1 bg-black text-white p-12 flex flex-col justify-center gap-10">
+                <div>
+                  <div className="text-4xl font-black text-brand-secondary">ISO 22000</div>
+                  <div className="text-[10px] font-black uppercase tracking-widest text-white/40">Food Safety Managed</div>
+                </div>
+                <div>
+                  <div className="text-4xl font-black text-white">HACCP</div>
+                  <div className="text-[10px] font-black uppercase tracking-widest text-white/40">Certified Compliance</div>
+                </div>
+              </div>
+
+              {/* Chilled Card */}
+              <div className="md:col-span-4 md:row-span-2 bg-slate-900 text-white p-12 group hover:border-brand-secondary border border-transparent transition-all flex flex-col justify-between">
+                <div>
+                  <div className="text-xs font-black text-brand-secondary mb-4 uppercase tracking-[0.3em]">Thermal Level 02</div>
+                  <h3 className="text-4xl font-black mb-6">CHILLED <br/>REFRIGERATED</h3>
+                  <div className="flex items-center gap-4 text-3xl font-black mb-8">
+                    <Thermometer size={32} className="text-brand-secondary" />
+                    0°C to +5°C
+                  </div>
+                </div>
+                <p className="text-white/40 text-sm font-medium">Precision moisture control for dairy, produce, and premium pharmaceuticals. Prevents product desiccation.</p>
+              </div>
+
+              {/* Value Add */}
+              <div className="md:col-span-8 md:row-span-2 bg-brand-secondary p-12 flex flex-col justify-between group overflow-hidden relative">
+                <div className="relative z-10">
+                  <h3 className="text-4xl md:text-6xl font-black text-black leading-none mb-6">VALUE ADDED <br/><span className="text-white italic">PORT SERVICES</span></h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-10">
+                    {[
+                      { title: "Cross-Docking", icon: <TrendingUp size={20} /> },
+                      { title: "Co-Packing", icon: <Package size={20} /> },
+                      { title: "Inventory Sync", icon: <Activity size={20} /> },
+                      { title: "Kitting", icon: <CheckCircle2 size={20} /> }
+                    ].map(item => (
+                      <div key={item.title} className="flex items-center gap-4 text-black font-black uppercase tracking-widest text-xs">
+                        {item.icon}
+                        {item.title}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="mt-12">
+                  <a href="#facility" className="inline-flex items-center gap-4 text-sm font-black text-black uppercase tracking-[0.2em] border-b-2 border-black pb-2">
+                    Explore Facility Capabilities
+                    <ArrowRight size={18} />
+                  </a>
+                </div>
+                <div className="absolute top-1/2 right-[-100px] text-[20rem] font-black text-white/10 select-none pointer-events-none -translate-y-1/2 rotate-12">
+                  3PL
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Specialized Storage Environments */}
-        <section className="bg-white text-black" id="services">
-          <div className="max-w-container-max mx-auto border-x border-slate-100">
-            <div className="p-10 md:p-20 text-center border-b border-slate-100">
-               <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter uppercase">Temperature Controlled Warehouse UAE</h2>
-               <p className="text-slate-500 font-medium max-w-2xl mx-auto">Providing frozen, chilled and ambient cold storage in Sharjah with temperatures ranging from -18°C to +15°C across 7 dedicated rooms.</p>
-            </div>
-            {/* Card 1: Ultra-Low & Deep Frozen */}
-            <motion.div 
-              {...fadeIn}
-              className="grid grid-cols-1 lg:grid-cols-2 border-b border-slate-100"
-            >
-              <div className="p-10 md:p-20 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-slate-100">
-                <div className="text-xs font-black uppercase tracking-[0.5em] text-brand-secondary mb-6">Thermal Level 01</div>
-                <h2 className="text-4xl md:text-6xl font-black mb-8 leading-[0.9]">
-                  Ultra-Low & <br/>
-                  <span className="text-stroke-cyan">Deep Frozen</span>
-                </h2>
-                <div className="flex items-center gap-4 text-3xl font-black">
-                  <Snowflake size={32} className="text-brand-secondary" />
-                  Upto -18°C
-                </div>
-              </div>
-              <div className="p-10 md:p-20 bg-slate-50 flex flex-col justify-center space-y-10">
-                <div>
-                  <h4 className="text-[10px] uppercase tracking-[0.3em] font-black text-brand-secondary/60 mb-4">Strategic Asset Focus</h4>
-                  <p className="text-3xl font-black leading-[1.1] tracking-tighter">Imported poultry, meat, seafood and frozen commodities</p>
-                </div>
-                <div>
-                  <h4 className="text-[10px] uppercase tracking-widest font-black text-slate-400 mb-4">Operational Features</h4>
-                  <ul className="space-y-4 text-slate-600 font-medium leading-relaxed">
-                    <li>• Independent redundant refrigeration circuits.</li>
-                    <li>• Temperature fluctuations entirely prevented even during peak loading.</li>
-                    <li className="text-brand-secondary/80 italic">• UAE is among the world's largest consumers of meat and seafood — robust frozen infrastructure is non-negotiable.</li>
-                  </ul>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Card 2: Chilled & Refrigerated */}
-            <motion.div 
-              {...fadeIn}
-              className="grid grid-cols-1 lg:grid-cols-2 border-b border-slate-100"
-            >
-              <div className="p-10 md:p-20 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-slate-100 lg:order-2">
-                <div className="text-xs font-black uppercase tracking-[0.5em] text-brand-secondary mb-6">Thermal Level 02</div>
-                <h2 className="text-4xl md:text-6xl font-black mb-8 leading-[0.9]">
-                  Chilled & <br/>
-                  <span className="text-stroke-cyan">Refrigerated</span>
-                </h2>
-                <div className="flex items-center gap-4 text-3xl font-black">
-                  <Thermometer size={32} className="text-brand-secondary" />
-                  0°C to +5°C
-                </div>
-              </div>
-              <div className="p-10 md:p-20 flex flex-col justify-center space-y-10 lg:order-1">
-                <div>
-                  <h4 className="text-[10px] uppercase tracking-[0.3em] font-black text-brand-secondary/60 mb-4">Strategic Asset Focus</h4>
-                  <p className="text-3xl font-black leading-[1.1] tracking-tighter">Dairy products, fresh fruits, vegetables, pharmaceutical goods</p>
-                </div>
-                <div>
-                  <h4 className="text-[10px] uppercase tracking-widest font-black text-slate-400 mb-4">Operational Features</h4>
-                  <ul className="space-y-4 text-slate-600 font-medium leading-relaxed">
-                    <li>• Dual cascade evaporator systems.</li>
-                    <li>• Precise humidity control prevents product desiccation and extends shelf life.</li>
-                    <li className="text-brand-secondary/80 italic">• Chilled storage is the leading revenue segment in the UAE cold chain market.</li>
-                  </ul>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Card 3: Ambient & Buffer */}
-            <motion.div 
-              {...fadeIn}
-              className="grid grid-cols-1 lg:grid-cols-2"
-            >
-              <div className="p-10 md:p-20 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-slate-100">
-                <div className="text-xs font-black uppercase tracking-[0.5em] text-brand-secondary mb-6">Thermal Level 03</div>
-                <h2 className="text-4xl md:text-6xl font-black mb-8 leading-[0.9]">
-                  Ambient & <br/>
-                  <span className="text-stroke-cyan">Buffer Storage</span>
-                </h2>
-                <div className="flex items-center gap-4 text-3xl font-black">
-                  <Wind size={32} className="text-brand-secondary" />
-                  Up to +15°C
-                </div>
-              </div>
-              <div className="p-10 md:p-20 bg-slate-50 flex flex-col justify-center space-y-10">
-                <div>
-                  <h4 className="text-[10px] uppercase tracking-[0.3em] font-black text-brand-secondary/60 mb-4">Strategic Asset Focus</h4>
-                  <p className="text-3xl font-black leading-[1.1] tracking-tighter">Medical supplies, cosmetics, confectionery, dry foodstuffs</p>
-                </div>
-                <div>
-                  <h4 className="text-[10px] uppercase tracking-widest font-black text-slate-400 mb-4">Operational Features</h4>
-                  <ul className="space-y-4 text-slate-600 font-medium leading-relaxed">
-                    <li>• Vital thermal buffer zones.</li>
-                    <li>• Eliminates thermal shock during goods transfer.</li>
-                    <li className="text-brand-secondary/80 italic">• Prevents packaging condensation and degradation during outbound transport.</li>
-                  </ul>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Value Added Solutions Section */}
-        <section className="py-32 bg-slate-50 text-black border-y border-slate-100" id="facility">
+        {/* Section 04: The Process Flow */}
+        <section className="py-32 bg-brand-bg relative overflow-hidden" id="facility">
           <div className="max-w-container-max mx-auto px-10">
-            <div className="max-w-4xl mb-24">
-              <motion.div {...fadeIn}>
-                <h3 className="text-xs uppercase tracking-[0.5em] font-black text-brand-secondary mb-10">3PL Cold Chain UAE</h3>
-                <h2 className="text-5xl md:text-8xl font-black mb-10 leading-[0.9] tracking-tighter uppercase">
-                  Value Added <br/>
-                  <span className="text-stroke-cyan italic">Logistics Sharjah</span>
-                </h2>
-                <p className="text-slate-600 text-xl font-medium leading-relaxed max-w-3xl">
-                  Modern maritime logistics demands more than passive warehousing. Port Khalid Cold Store operates as a dynamic extension of your supply chain — offering a comprehensive suite of value-added services designed to accelerate speed to market, reduce secondary handling costs and ensure full regulatory compliance.
-                </p>
-              </motion.div>
+            <div className="text-center mb-24">
+              <h3 className="text-xs uppercase tracking-[0.5em] font-black text-brand-secondary mb-10">The Cold Chain Journey</h3>
+              <h2 className="text-5xl md:text-7xl font-black text-white leading-none tracking-tighter uppercase">
+                Optimized <span className="text-stroke-white italic">Throughput</span>
+              </h2>
             </div>
 
-            <div className="space-y-6">
-              <div className="hidden lg:grid grid-cols-12 gap-8 px-12 py-6 bg-black text-white text-[10px] font-black uppercase tracking-[0.4em] border-l-8 border-black shadow-xl relative z-10">
-                <div className="col-span-3">Operational Service</div>
-                <div className="col-span-6">Capability & Methodology</div>
-                <div className="col-span-3">Strategic Result</div>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {[
                 { 
-                  service: "Rapid Cross-Docking", 
-                  what: "Direct transfer of cargo from inbound vessels to outbound transport systems, bypassing long-term storage to maximize velocity.", 
-                  benefit: "Reduces warehousing overhead & minimizes transit times for fast-moving goods." 
+                  step: "01", 
+                  title: "Dockside Receipt", 
+                  desc: "Direct port-side handling at Berths 9 & 10. Cargo is immediately transitioned to temperature-controlled loading bays to prevent thermal shock.",
+                  icon: <Anchor size={32} />
                 },
                 { 
-                  service: "Order Picking & Kitting", 
-                  what: "Precision consolidation of multiple SKUs into retail-ready, wholesale, or distribution-center-optimized pallets.", 
-                  benefit: "Maximizes cubic utilization & significantly reduces downstream labor costs." 
+                  step: "02", 
+                  title: "Technical Storage", 
+                  desc: "Allocation to one of 7 specialized rooms. Continuous environmental logging ensures absolute compliance with storage specifications.",
+                  icon: <Warehouse size={32} />
                 },
                 { 
-                  service: "Co-Packing & Localization", 
-                  what: "Arabic ingredient labeling, barcode generation, and promotional bundling curated for regional market entry.", 
-                  benefit: "Ensures UAE municipality compliance & prevents customs delays at the border." 
-                },
-                { 
-                  service: "Inventory Management", 
-                  what: "Strict FIFO and FEFO rotation protocols utilizing proprietary tracking systems for absolute stock integrity.", 
-                  benefit: "Eliminates spoilage risk & maximizes shelf-life for the end consumer." 
-                },
-              ].map((row, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  whileHover={{ x: 15 }}
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-8 px-8 lg:px-12 py-12 bg-white border border-slate-200 border-l-8 border-l-brand-secondary hover:shadow-2xl transition-all group relative items-center"
-                >
-                  <div className="col-span-1 lg:col-span-3">
-                    <h4 className="text-2xl font-black group-hover:text-brand-secondary transition-colors tracking-tighter uppercase">{row.service}</h4>
+                  step: "03", 
+                  title: "Managed Dispatch", 
+                  desc: "Last-mile ready consolidation and value-added kitting. Rapid release systems ensure your assets reach the market in peak condition.",
+                  icon: <Zap size={32} />
+                }
+              ].map((process, i) => (
+                <div key={i} className="glass-card p-12 relative group hover:border-brand-secondary transition-all">
+                  <div className="absolute top-10 right-10 text-6xl font-black text-white/5 italic group-hover:text-brand-secondary/10 transition-colors">
+                    {process.step}
                   </div>
-                  <div className="col-span-1 lg:col-span-6 lg:border-l lg:border-slate-100 lg:pl-10">
-                    <p className="text-slate-500 font-medium leading-relaxed">{row.what}</p>
+                  <div className="w-16 h-16 bg-brand-secondary/10 flex items-center justify-center text-brand-secondary mb-10 group-hover:bg-brand-secondary group-hover:text-black transition-colors">
+                    {process.icon}
                   </div>
-                  <div className="col-span-1 lg:col-span-3 lg:border-l lg:border-slate-100 lg:pl-10">
-                    <div className="text-[10px] font-black uppercase tracking-widest text-brand-secondary mb-3 opacity-50">Strategic Result</div>
-                    <p className="text-sm font-black text-black leading-snug">{row.benefit}</p>
-                  </div>
-                </motion.div>
+                  <h4 className="text-2xl font-black text-white mb-6 uppercase tracking-tight">{process.title}</h4>
+                  <p className="text-white/40 font-medium leading-relaxed">{process.desc}</p>
+                </div>
               ))}
             </div>
           </div>
@@ -731,6 +704,89 @@ export default function App() {
                   </p>
                 </motion.div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Section 06: Trust Signals & Client Reach */}
+        <section className="py-24 bg-brand-surface/50 border-y border-white/5 overflow-hidden">
+          <div className="max-w-container-max mx-auto px-10">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+              <div className="max-w-xs">
+                <div className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-secondary mb-2">Network Velocity</div>
+                <h3 className="text-white text-2xl font-black uppercase tracking-tighter">TRUSTED BY GLOBAL MARITIME LEADERS</h3>
+              </div>
+              
+              <div className="flex-1 overflow-hidden relative grayscale opacity-40">
+                <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-brand-bg to-transparent z-10"></div>
+                <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-brand-bg to-transparent z-10"></div>
+                
+                <motion.div 
+                  initial={{ x: 0 }}
+                  animate={{ x: "-50%" }}
+                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                  className="flex items-center gap-20 whitespace-nowrap"
+                >
+                  {/* Placeholder Logos as stylized text/icons for premium industrial look */}
+                  {[
+                    "MARSK LOGISTICS", "GLOBAL TRADERS", "EMIRATES FOODS", "GULF MARITIME", "SHARJAH PORTS", 
+                    "MARSK LOGISTICS", "GLOBAL TRADERS", "EMIRATES FOODS", "GULF MARITIME", "SHARJAH PORTS"
+                  ].map((logo, idx) => (
+                    <div key={idx} className="text-xl font-black tracking-[0.3em] text-white/50 hover:text-brand-secondary transition-colors cursor-default">
+                      {logo}
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 07: Final Conversion Section */}
+        <section className="py-32 bg-brand-secondary relative overflow-hidden group">
+          <div className="absolute inset-0 industrial-grid opacity-20"></div>
+          <div className="max-w-container-max mx-auto px-10 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              <div>
+                <h3 className="text-xs uppercase tracking-[0.4em] font-black text-black mb-10">Operational Provisioning</h3>
+                <h2 className="text-6xl md:text-8xl font-black text-black leading-[0.8] tracking-tighter uppercase mb-10">
+                  Secure Your <br/>
+                  <span className="text-white italic">Capacity</span>
+                </h2>
+                <p className="text-black/70 text-xl font-medium leading-relaxed max-w-lg mb-12">
+                  Our facility is currently processing peak-season allocations. Connect with our technical team today to reserve your thermal zone at Berths 9 & 10.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-6">
+                  <motion.a 
+                    href="#inquiry"
+                    whileHover={{ scale: 1.05 }}
+                    className="px-10 py-6 bg-black text-white font-black uppercase tracking-[0.2em] text-sm flex items-center justify-center gap-4 shadow-2xl"
+                  >
+                    Request Technical Proposal
+                    <ArrowRight size={20} />
+                  </motion.a>
+                </div>
+              </div>
+              
+              <div className="hidden lg:block relative">
+                <div className="glass-card bg-black/10 border-black/10 p-12 -rotate-3 scale-110">
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <div className="text-[10px] font-black uppercase tracking-[0.5em] text-black/40">Real-Time Capacity</div>
+                      <div className="text-[10px] font-black uppercase tracking-[0.5em] text-white">Live Update</div>
+                    </div>
+                    <div className="h-px bg-black/5"></div>
+                    <div className="space-y-4">
+                      {["Room 01: Deep Freeze", "Room 04: Chilled", "Room 07: Ambient"].map((room, idx) => (
+                        <div key={idx} className="flex items-center justify-between">
+                          <span className="text-black font-black uppercase text-xs tracking-widest">{room}</span>
+                          <span className="text-black/40 text-[10px] font-black uppercase tracking-widest">Available</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
