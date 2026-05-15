@@ -48,19 +48,45 @@ const staggerContainer = {
   transition: { staggerChildren: 0.1 }
 };
 
-const Logo = ({ className = "", tagline = false }: { className?: string, tagline?: boolean }) => {
+const Logo = ({ className = "", invertText = true, showText = true }: { className?: string, invertText?: boolean, showText?: boolean }) => {
   return (
-    <div className={`flex flex-col ${className}`}>
-      <img 
-        src="/logo.png" 
-        alt="Port Khalid Cold Stores" 
-        className="h-11 md:h-[60px] w-auto object-contain"
-        referrerPolicy="no-referrer"
-      />
-      {tagline && (
-        <span className="text-white/40 text-[9px] font-black uppercase tracking-[0.2em] italic mt-2 border-t border-white/10 pt-2 text-center md:text-left">
-          Dockside Cold Chain Excellence Since 1985
-        </span>
+    <div className={`flex items-center gap-4 ${className}`}>
+      <div className="relative w-auto h-11 md:h-14 flex-shrink-0">
+        <img 
+          src="/logo.png" 
+          alt="Port Khalid Cold Store Logo" 
+          className="h-full w-auto object-contain"
+          onError={(e) => {
+            // Fallback to SVG if image is missing
+            e.currentTarget.style.display = 'none';
+            const parent = e.currentTarget.parentElement;
+            if (parent) {
+              const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+              svg.setAttribute("viewBox", "0 0 100 100");
+              svg.setAttribute("class", "w-11 h-11 md:w-14 md:h-14");
+              svg.innerHTML = `
+                <path d="M50 5 L89 27.5 L89 72.5 L50 95 L11 72.5 L11 27.5 Z" fill="#0D2B3E" />
+                <g stroke="white" strokeWidth="2.5" strokeLinecap="round">
+                  <line x1="50" y1="20" x2="50" y2="80" />
+                  <line x1="24" y1="35" x2="76" y2="65" />
+                  <line x1="24" y1="65" x2="76" y2="35" />
+                </g>
+                <path d="M10 55 Q10 95 50 98 Q90 95 90 55 L82 55 Q82 85 50 88 Q18 85 18 55 Z" fill="#00A3B5" />
+              `;
+              parent.appendChild(svg);
+            }
+          }}
+        />
+      </div>
+      {showText && (
+        <div className="flex flex-col">
+          <span className={`${invertText ? 'text-white' : 'text-[#0D2B3E]'} font-black text-2xl md:text-3xl tracking-tighter leading-none whitespace-nowrap font-sans uppercase`}>
+            Port Khalid
+          </span>
+          <span className="text-[#00A3B5] font-black text-[9px] md:text-[11px] tracking-[0.45em] md:tracking-[0.52em] leading-tight uppercase font-sans -mt-0.5">
+            Cold Store
+          </span>
+        </div>
       )}
     </div>
   );
@@ -280,7 +306,7 @@ export default function App() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-brand-primary/80 backdrop-blur-md border-b border-white/5">
         <div className="max-w-container-max mx-auto px-10 h-24 flex items-center justify-between">
-          <Logo className="scale-100 origin-left" />
+          <Logo className="origin-left" />
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-10">
@@ -322,7 +348,9 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             className="md:hidden bg-brand-primary/95 backdrop-blur-xl border-b border-white/10 px-10 py-10"
           >
-            <Logo className="mb-12" />
+            <div className="mb-10 pb-6 border-b border-white/10">
+              <Logo invertText={true} />
+            </div>
             <div className="flex flex-col gap-6">
               {["About Us", "Services", "Facility", "Compliance", "Contact"].map((item) => (
                 <a
@@ -931,7 +959,13 @@ export default function App() {
                         >
                           {isSubmitting ? (
                             <>
-                              <div className="w-5 h-5 border-2 border-slate-400 border-t-brand-secondary animate-spin rounded-full"></div>
+                              <motion.div 
+                                animate={{ rotate: 360 }} 
+                                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                className="w-6 h-6 flex items-center justify-center"
+                              >
+                                <img src="/logo.png" alt="" className="w-full h-full object-contain opacity-50" />
+                              </motion.div>
                               Transmitting Inquiry...
                             </>
                           ) : (
@@ -1047,14 +1081,15 @@ export default function App() {
                     </div>
                   </motion.div>
   
-                  <div className="p-8 border border-white/10 bg-white/5 backdrop-blur-sm">
-                    <Logo className="mb-8" />
-                    <div className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-secondary mb-6 italic">Corporate Identity</div>
-                    <h4 className="text-white font-black text-xl leading-tight tracking-tighter uppercase mb-2">
-                      Port Khalid Cold Stores Co.<br/>
-                      Private Limited
-                    </h4>
-                    <div className="h-1 w-20 bg-brand-secondary mt-6"></div>
+                  <div className="p-8 border border-white/10 bg-white/5 backdrop-blur-sm flex flex-col items-start gap-6">
+                    <Logo invertText={true} showText={false} className="scale-125 origin-left" />
+                    <div className="space-y-2">
+                      <div className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-secondary italic">Corporate Identity</div>
+                      <h4 className="text-white font-black text-xl leading-tight tracking-tighter uppercase">
+                        Port Khalid Cold Stores Co.<br/>
+                        Private Limited
+                      </h4>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1067,7 +1102,10 @@ export default function App() {
         <div className="max-w-container-max mx-auto px-10">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-16 border-b border-white/5 pb-20 mb-16">
             <div className="col-span-1 lg:col-span-2">
-              <Logo className="mb-10" tagline={true} />
+              <Logo className="mb-6 scale-90 origin-left" />
+              <p className="text-brand-secondary text-[10px] uppercase font-black tracking-[0.3em] mb-4">
+                Dockside Cold Chain Excellence Since 1985
+              </p>
               <p className="text-white/40 text-lg font-medium max-w-md leading-relaxed">
                 A frontline guardian of public health and brand reputation, providing strategic cold chain infrastructure in the UAE for over four decades.
               </p>
