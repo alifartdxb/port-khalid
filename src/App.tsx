@@ -28,10 +28,11 @@ import {
   Search,
   Info,
   AlertCircle,
-  Check
+  Check,
+  ExternalLink
 } from "lucide-react";
 import React, { useState } from "react";
-import { ChatBot } from "./components/ChatBot";
+import { WhatsAppButton } from "./components/WhatsAppButton";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -47,59 +48,66 @@ const staggerContainer = {
   transition: { staggerChildren: 0.1 }
 };
 
-const Logo = ({ className = "", invertText = true }: { className?: string, invertText?: boolean }) => {
-  const navy = "#0B1E3F";
-  const teal = "#00AFC1";
+const Logo = ({ className = "", invertText = true, tagline = false }: { className?: string, invertText?: boolean, tagline?: boolean }) => {
+  const navy = "#0D2B3E";
+  const teal = "#00A3B5";
   
   return (
-    <div className={`flex items-center gap-5 ${className}`}>
-      <div className="relative w-14 h-14 flex-shrink-0">
-        <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-lg">
+    <div className={`flex items-center gap-4 md:gap-6 ${className}`}>
+      {/* Official Logo Symbol - Scaled for 44px mobile / 60px desktop */}
+      <div className="relative w-[44px] h-[44px] md:w-[60px] md:h-[60px] flex-shrink-0">
+        <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-sm">
           {/* Hexagon Background */}
           <path 
-            d="M50 5 L89 27.5 L89 72.5 L50 95 L11 72.5 L11 27.5 Z" 
+            d="M50 8 L88 30 L88 70 L50 92 L12 70 L12 30 Z" 
             fill={navy} 
           />
           
           {/* Snowflake centerpiece */}
           <g stroke="white" strokeWidth="2.5" strokeLinecap="round">
             {/* Main arms */}
-            <line x1="50" y1="20" x2="50" y2="80" />
-            <line x1="24" y1="35" x2="76" y2="65" />
-            <line x1="24" y1="65" x2="76" y2="35" />
+            <line x1="50" y1="25" x2="50" y2="75" />
+            <line x1="28" y1="38" x2="72" y2="62" />
+            <line x1="28" y1="62" x2="72" y2="38" />
             
-            {/* Snowflake branches - V shapes */}
+            {/* Snowflake branches */}
             {[0, 60, 120, 180, 240, 300].map((angle) => (
               <g key={angle} transform={`rotate(${angle} 50 50)`}>
-                <line x1="50" y1="22" x2="45" y2="28" />
-                <line x1="50" y1="22" x2="55" y2="28" />
+                <line x1="50" y1="28" x2="44" y2="35" />
+                <line x1="50" y1="28" x2="56" y2="35" />
               </g>
             ))}
           </g>
 
-          {/* Ship Hull Silhouette within hexagon */}
-          <path d="M35 60 L50 88 L65 60 Z" fill={navy} />
+          {/* Ship Bow/Hull Silhouette (White accent) */}
+          <path d="M45 70 L50 85 L55 70 Z" fill="white" className="opacity-20" />
 
           {/* Teal Base / Anchor / Waves */}
           <path 
-            d="M10 55 Q10 95 50 98 Q90 95 90 55 L82 55 Q82 85 50 88 Q18 85 18 55 Z" 
+            d="M8 58 Q8 95 50 98 Q92 95 92 58 L84 58 Q84 88 50 90 Q16 88 16 58 Z" 
             fill={teal} 
           />
-          {/* Arrow tips */}
-          <path d="M5 60 L10 45 L15 60 Z" fill={teal} />
-          <path d="M85 60 L90 45 L95 60 Z" fill={teal} />
-          
-          {/* Center divider white line */}
-          <rect x="49" y="80" width="2" height="18" fill="white" />
+          {/* Arrow tips for anchor effect */}
+          <path d="M4 62 L8 48 L12 62 Z" fill={teal} />
+          <path d="M88 62 L92 48 L96 62 Z" fill={teal} />
         </svg>
       </div>
+
+      {/* Official Logo Text */}
       <div className="flex flex-col">
-        <span className={`${invertText ? 'text-white' : 'text-[#0B1E3F]'} font-black text-3xl tracking-tighter leading-none whitespace-nowrap font-sans`}>
-          PORT KHALID
-        </span>
-        <span className="text-[#00AFC1] font-black text-[11px] tracking-[0.45em] leading-tight uppercase font-sans">
-          COLD STORES
-        </span>
+        <div className="flex flex-col mb-1">
+          <span className={`${invertText ? 'text-white' : 'text-[#0D2B3E]'} font-black text-2xl md:text-3xl tracking-tighter leading-none whitespace-nowrap font-sans`}>
+            PORT KHALID
+          </span>
+          <span className="text-[#00A3B5] font-black text-[10px] md:text-[13px] tracking-[0.45em] leading-tight uppercase font-sans">
+            COLD STORES
+          </span>
+        </div>
+        {tagline && (
+          <span className="text-white/40 text-[9px] font-black uppercase tracking-[0.2em] italic border-t border-white/10 pt-2">
+            Dockside Cold Chain Excellence Since 1985
+          </span>
+        )}
       </div>
     </div>
   );
@@ -319,7 +327,7 @@ export default function App() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-brand-primary/80 backdrop-blur-md border-b border-white/5">
         <div className="max-w-container-max mx-auto px-10 h-24 flex items-center justify-between">
-          <Logo className="scale-75 md:scale-100 origin-left" />
+          <Logo className="scale-100 origin-left" />
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-10">
@@ -361,6 +369,7 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             className="md:hidden bg-brand-primary/95 backdrop-blur-xl border-b border-white/10 px-10 py-10"
           >
+            <Logo className="mb-12" />
             <div className="flex flex-col gap-6">
               {["About Us", "Services", "Facility", "Compliance", "Contact"].map((item) => (
                 <a
@@ -991,69 +1000,111 @@ export default function App() {
         {/* Contact Section */}
         <section className="py-40 bg-brand-bg relative overflow-hidden" id="contact">
           <div className="max-w-container-max mx-auto px-10 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-              <div className="max-w-2xl text-left">
-                <motion.div {...fadeIn}>
-                  <h3 className="text-xs uppercase tracking-[0.4em] font-black mb-10 text-brand-secondary">Strategic Infrastructure</h3>
-                  <h2 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter mb-10 leading-[0.8]">
-                    Get in <br/> <span className="text-stroke-white italic">Touch</span>
-                  </h2>
-                </motion.div>
-                
-                <div className="space-y-12 mt-16">
-                  <div className="flex items-start gap-8 group">
-                    <div className="w-14 h-14 border border-white/20 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-black transition-all duration-500">
-                      <MapPin size={24} />
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div className="max-w-2xl text-left">
+                  <motion.div {...fadeIn}>
+                    <h3 className="text-xs uppercase tracking-[0.4em] font-black mb-10 text-brand-secondary">Strategic Infrastructure</h3>
+                    <h2 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter mb-10 leading-[0.8]">
+                      Get in <br/> <span className="text-stroke-white italic">Touch</span>
+                    </h2>
+                  </motion.div>
+                  
+                  <div className="space-y-12 mt-16">
+                    <div className="flex items-start gap-8 group">
+                      <div className="w-14 h-14 border border-white/20 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-black transition-all duration-500">
+                        <MapPin size={24} />
+                      </div>
+                      <div>
+                        <div className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 mb-3">Gateway Location</div>
+                        <p className="text-white text-xl font-bold leading-tight">
+                          Layyah Street, Al Layyeh Suburb,<br/>
+                          Near Berth 9 & 10, Sharjah Port, UAE
+                        </p>
+                        <p className="text-brand-secondary/60 text-sm mt-3 font-black tracking-widest">P.O. BOX: 7097, SHARJAH</p>
+                      </div>
                     </div>
-                    <div>
-                      <div className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 mb-3">Gateway Location</div>
-                      <p className="text-white text-xl font-bold leading-tight">
-                        Layyah Street, Al Layyeh Suburb,<br/>
-                        Near Berth 9 & 10, Sharjah Port, UAE
-                      </p>
-                      <p className="text-brand-secondary/60 text-sm mt-3 font-black tracking-widest">P.O. BOX: 7097, SHARJAH</p>
+  
+                    <div className="flex items-start gap-8 group">
+                      <div className="w-14 h-14 border border-white/20 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-black transition-all duration-500">
+                        <Phone size={24} />
+                      </div>
+                      <div>
+                        <div className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 mb-3">Direct Terminal Lines</div>
+                        <p className="text-white text-2xl font-black tracking-tight">+971 6 528 1796</p>
+                        <div className="flex items-center gap-4 mt-2">
+                          <span className="text-white/40 text-[10px] font-black uppercase tracking-widest">Fax / Line 2</span>
+                          <p className="text-white/60 font-bold">+971 6 528 4820</p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="flex items-start gap-8 group">
-                    <div className="w-14 h-14 border border-white/20 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-black transition-all duration-500">
-                      <Phone size={24} />
-                    </div>
-                    <div>
-                      <div className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 mb-3">Direct Terminal Lines</div>
-                      <p className="text-white text-2xl font-black tracking-tight">+971 6 528 1796</p>
-                      <div className="flex items-center gap-4 mt-2">
-                        <span className="text-white/40 text-[10px] font-black uppercase tracking-widest">Fax / Line 2</span>
-                        <p className="text-white/60 font-bold">+971 6 528 4820</p>
+  
+                    <div className="flex items-start gap-8 group">
+                      <div className="w-14 h-14 border border-white/20 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-black transition-all duration-500">
+                        <Mail size={24} />
+                      </div>
+                      <div>
+                        <div className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 mb-3">Inquiry Desk</div>
+                        <p className="text-white text-xl font-bold group-hover:text-brand-secondary transition-colors cursor-pointer">
+                          info@portkhalidcoldstore.ae
+                        </p>
                       </div>
                     </div>
                   </div>
-
-                  <div className="flex items-start gap-8 group">
-                    <div className="w-14 h-14 border border-white/20 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-black transition-all duration-500">
-                      <Mail size={24} />
-                    </div>
-                    <div>
-                      <div className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 mb-3">Inquiry Desk</div>
-                      <p className="text-white text-xl font-bold group-hover:text-brand-secondary transition-colors cursor-pointer">
-                        info@portkhalidcoldstore.ae
+                </div>
+  
+                <div className="space-y-10">
+                  <motion.div {...fadeIn} className="space-y-6">
+                    <div className="space-y-2">
+                      <h3 className="text-brand-secondary font-black uppercase tracking-[0.4em] text-xs">Our Location</h3>
+                      <p className="text-white/70 font-medium leading-relaxed">
+                        Strategically located at Port Khalid, Sharjah for direct dockside cold chain operations and rapid cargo handling access.
                       </p>
                     </div>
+                    
+                    <div className="relative w-full aspect-video lg:aspect-square bg-slate-800 rounded-xl overflow-hidden shadow-2xl border border-white/10 group">
+                      <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3606.353386348825!2d55.3718!3d25.3598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5bc02c46f687%3A0xb3679c669f59f976!2sPort%20Khalid%20Cold%20Stores!5e0!3m2!1sen!2sae!4v1715760000000!5m2!1sen!2sae"
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        allowFullScreen={true}
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        className="grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+                        title="Port Khalid Cold Stores Location"
+                      ></iframe>
+                    </div>
+  
+                    <div className="space-y-6">
+                      <div className="text-white/90 font-black text-sm uppercase tracking-wider leading-relaxed">
+                        Port Khalid Cold Stores Co. Private Limited<br/>
+                        Layyah Street, Near Berth 9 & 10<br/>
+                        Sharjah Port, UAE
+                      </div>
+                      
+                      <a 
+                        href="https://maps.app.goo.gl/Kx13xVajqkn9f8BB6" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3 bg-brand-secondary hover:bg-white text-black font-black text-[10px] uppercase tracking-[0.2em] px-8 py-4 rounded-lg transition-all shadow-xl shadow-brand-secondary/20 group"
+                      >
+                        Open in Google Maps
+                        <ExternalLink size={14} className="group-hover:translate-x-1 transition-transform" />
+                      </a>
+                    </div>
+                  </motion.div>
+  
+                  <div className="p-8 border border-white/10 bg-white/5 backdrop-blur-sm">
+                    <Logo className="mb-8 scale-75 origin-left" invertText={true} />
+                    <div className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-secondary mb-6 italic">Corporate Identity</div>
+                    <h4 className="text-white font-black text-xl leading-tight tracking-tighter uppercase mb-2">
+                      Port Khalid Cold Stores Co.<br/>
+                      Private Limited
+                    </h4>
+                    <div className="h-1 w-20 bg-brand-secondary mt-6"></div>
                   </div>
                 </div>
               </div>
-
-              <div className="flex flex-col justify-end">
-                <div className="p-12 border border-white/10 bg-white/5 backdrop-blur-sm">
-                  <div className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-secondary mb-6 italic">Corporate Identity</div>
-                  <h4 className="text-white font-black text-2xl leading-tight tracking-tighter uppercase mb-2">
-                    Port Khalid Cold Stores Co.<br/>
-                    Private Limited
-                  </h4>
-                  <div className="h-1 w-20 bg-brand-secondary mt-6"></div>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
       </main>
@@ -1063,7 +1114,7 @@ export default function App() {
         <div className="max-w-container-max mx-auto px-10">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-16 border-b border-white/5 pb-20 mb-16">
             <div className="col-span-1 lg:col-span-2">
-              <Logo className="mb-10" />
+              <Logo className="mb-10" tagline={true} />
               <p className="text-white/40 text-lg font-medium max-w-md leading-relaxed">
                 A frontline guardian of public health and brand reputation, providing strategic cold chain infrastructure in the UAE for over four decades.
               </p>
@@ -1104,7 +1155,7 @@ export default function App() {
           </div>
         </div>
       </footer>
-      <ChatBot />
+      <WhatsAppButton />
     </div>
   );
 }
