@@ -83,8 +83,8 @@ const Logo = ({ className = "", invertText = true, showText = true }: { classNam
           <span className={`${invertText ? 'text-white' : 'text-[#0D2B3E]'} font-black text-2xl md:text-3xl tracking-tighter leading-none whitespace-nowrap font-sans uppercase`}>
             Port Khalid
           </span>
-          <span className="text-[#00A3B5] font-black text-[9px] md:text-[11px] tracking-[0.45em] md:tracking-[0.52em] leading-tight uppercase font-sans -mt-0.5">
-            Cold Store
+          <span className="text-[#00A3B5] font-black text-[9px] md:text-[12px] tracking-[0.45em] md:tracking-[0.87em] leading-tight uppercase font-sans -mt-0.5">
+            Cold Stores
           </span>
         </div>
       )}
