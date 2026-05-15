@@ -48,67 +48,20 @@ const staggerContainer = {
   transition: { staggerChildren: 0.1 }
 };
 
-const Logo = ({ className = "", invertText = true, tagline = false }: { className?: string, invertText?: boolean, tagline?: boolean }) => {
-  const navy = "#0D2B3E";
-  const teal = "#00A3B5";
-  
+const Logo = ({ className = "", tagline = false }: { className?: string, tagline?: boolean }) => {
   return (
-    <div className={`flex items-center gap-4 md:gap-6 ${className}`}>
-      {/* Official Logo Symbol - Scaled for 44px mobile / 60px desktop */}
-      <div className="relative w-[44px] h-[44px] md:w-[60px] md:h-[60px] flex-shrink-0">
-        <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-sm">
-          {/* Hexagon Background */}
-          <path 
-            d="M50 8 L88 30 L88 70 L50 92 L12 70 L12 30 Z" 
-            fill={navy} 
-          />
-          
-          {/* Snowflake centerpiece */}
-          <g stroke="white" strokeWidth="2.5" strokeLinecap="round">
-            {/* Main arms */}
-            <line x1="50" y1="25" x2="50" y2="75" />
-            <line x1="28" y1="38" x2="72" y2="62" />
-            <line x1="28" y1="62" x2="72" y2="38" />
-            
-            {/* Snowflake branches */}
-            {[0, 60, 120, 180, 240, 300].map((angle) => (
-              <g key={angle} transform={`rotate(${angle} 50 50)`}>
-                <line x1="50" y1="28" x2="44" y2="35" />
-                <line x1="50" y1="28" x2="56" y2="35" />
-              </g>
-            ))}
-          </g>
-
-          {/* Ship Bow/Hull Silhouette (White accent) */}
-          <path d="M45 70 L50 85 L55 70 Z" fill="white" className="opacity-20" />
-
-          {/* Teal Base / Anchor / Waves */}
-          <path 
-            d="M8 58 Q8 95 50 98 Q92 95 92 58 L84 58 Q84 88 50 90 Q16 88 16 58 Z" 
-            fill={teal} 
-          />
-          {/* Arrow tips for anchor effect */}
-          <path d="M4 62 L8 48 L12 62 Z" fill={teal} />
-          <path d="M88 62 L92 48 L96 62 Z" fill={teal} />
-        </svg>
-      </div>
-
-      {/* Official Logo Text */}
-      <div className="flex flex-col">
-        <div className="flex flex-col mb-1">
-          <span className={`${invertText ? 'text-white' : 'text-[#0D2B3E]'} font-black text-2xl md:text-3xl tracking-tighter leading-none whitespace-nowrap font-sans`}>
-            PORT KHALID
-          </span>
-          <span className="text-[#00A3B5] font-black text-[10px] md:text-[13px] tracking-[0.45em] leading-tight uppercase font-sans">
-            COLD STORES
-          </span>
-        </div>
-        {tagline && (
-          <span className="text-white/40 text-[9px] font-black uppercase tracking-[0.2em] italic border-t border-white/10 pt-2">
-            Dockside Cold Chain Excellence Since 1985
-          </span>
-        )}
-      </div>
+    <div className={`flex flex-col ${className}`}>
+      <img 
+        src="/logo.png" 
+        alt="Port Khalid Cold Stores" 
+        className="h-11 md:h-[60px] w-auto object-contain"
+        referrerPolicy="no-referrer"
+      />
+      {tagline && (
+        <span className="text-white/40 text-[9px] font-black uppercase tracking-[0.2em] italic mt-2 border-t border-white/10 pt-2 text-center md:text-left">
+          Dockside Cold Chain Excellence Since 1985
+        </span>
+      )}
     </div>
   );
 };
@@ -1095,7 +1048,7 @@ export default function App() {
                   </motion.div>
   
                   <div className="p-8 border border-white/10 bg-white/5 backdrop-blur-sm">
-                    <Logo className="mb-8 scale-75 origin-left" invertText={true} />
+                    <Logo className="mb-8" />
                     <div className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-secondary mb-6 italic">Corporate Identity</div>
                     <h4 className="text-white font-black text-xl leading-tight tracking-tighter uppercase mb-2">
                       Port Khalid Cold Stores Co.<br/>
